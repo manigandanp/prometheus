@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  prometheus-server:
+    image: prometheus-server
+    working_dir: "/prometheus"
+    command: "./prometheus --config.file=prometheus-new.yml"
+    ports:
+      - 9090:9090
+      - 9100:9100
+    volumes:
+      - ./prometheus-server/prometheus-new.yml:/prometheus/prometheus-new.yml
+  prometheus-node-exporter:
+    image: prometheus-node-expoter
+    working_dir: "/node_exporter"
+    command: "./node_exporter"
+    ports:
+      - 9101:9100
+  python-sample-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile-Python
+    working_dir: "/python-app"
+    command: "python3 server.py"
+    ports:
+      - 8000:8000
+      - 8001:8001
+    volumes:
+      - ./python-app/server.py:/python-app/server.py
