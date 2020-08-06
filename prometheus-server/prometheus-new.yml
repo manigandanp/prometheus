@@ -24,7 +24,7 @@ scrape_configs:
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
-
+    scrape_interval: 1s
     static_configs:
       - targets: ["0.0.0.0:9090"]
 
